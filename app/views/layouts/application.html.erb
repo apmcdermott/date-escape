@@ -6,7 +6,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+  <body>
+    <%= render 'layouts/flash' %>
     <header>
       <h1>Date Escape!</h1>
     </header>
@@ -16,8 +17,8 @@
     </nav>
 
     <main>
-      <%= render 'layouts/flash' %>
       <%= yield %>
     </main>
+
   </body>
 </html>
