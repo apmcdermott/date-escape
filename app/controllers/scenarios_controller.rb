@@ -9,6 +9,10 @@ class ScenariosController < ApplicationController
 
   def new
     @scenario = Scenario.new
+    @messages = Message.all
+    @message_triggers = @messages.map do |message|
+      message[:trigger]
+    end
   end
 
   def create
