@@ -1,4 +1,4 @@
-User can create account
+*User can create account
 User can view/edit profile
 User can create scenarios
 User can enable/disable scenarios
