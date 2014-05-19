@@ -17,6 +17,9 @@ gem 'coffee-rails', '~> 4.0.0'
 # Twilio API
 gem 'twilio-ruby'
 
+# Devise
+gem 'devise'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
