@@ -1,0 +1,30 @@
+User can create account
+User can view/edit profile
+User can create scenarios
+User can enable/disable scenarios
+User can create triggers that prompt DateEsc to call them
+  scenario-dependent
+  "panic word"?
+User texts app number with a trigger (shortcode?)
+  and app calls user number and Says predefined message
+
+User has:
+  name
+  email
+  scenarios/messages/triggers
+  message history
+  phone number
+
+Message has:
+  datetime
+  content
+  media?
+  trigger
+  scenario (optional)
+
+Scenario has:
+  title
+  enabled/disabled
+  notes
+
+
