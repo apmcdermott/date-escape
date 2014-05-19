@@ -37,15 +37,17 @@ group :production do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'shoulda-matchers'
-  gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
   gem 'faker'
-
   gem 'pry-rails'
   gem 'pry-nav'
   gem 'pry-stack_explorer'
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'shoulda-matchers'
 end
