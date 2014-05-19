@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Date Escape</title>
+  <title>Date Escape!</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-  <body>
-    <%= render 'layouts/flash' %>
-    <header>
-      <h1>Date Escape!</h1>
-    </header>
+<body>
+  <%= render 'layouts/flash', flash: flash %>
 
-    <nav>
-      <%= render 'layouts/navigation' %>
-    </nav>
+  <div class="container">
 
-    <main>
-      <%= yield %>
-    </main>
+  <header class="text-center">
+    <h1>Date Escape!</h1>
+    <p class="lead">pork chop sandwiches<br>what the-- get the f out we're all dead</p>
+  </header>
 
-  </body>
+  <%= render 'layouts/navigation' %>
+
+  <main>
+    <%= yield %>
+  </main>
+
+</body>
 </html>
