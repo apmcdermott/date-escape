@@ -23,6 +23,9 @@ gem 'twilio-ruby'
 # Devise authentication gem
 gem 'devise'
 
+# Bootstrap
+gem 'bootstrap-sass'
+
 group :production do
   gem 'rails_12factor'
 end
