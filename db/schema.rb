@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519162304) do
+ActiveRecord::Schema.define(version: 20140519212605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20140519162304) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "scenario_messages", force: true do |t|
+    t.integer  "scenario_id"
+    t.integer  "message_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scenario_messages", ["message_id"], name: "index_scenario_messages_on_message_id", using: :btree
+  add_index "scenario_messages", ["scenario_id"], name: "index_scenario_messages_on_scenario_id", using: :btree
 
   create_table "scenarios", force: true do |t|
     t.string   "title"
