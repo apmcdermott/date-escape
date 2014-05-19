@@ -1,1 +1,9 @@
-hi
+<h1>All Messages</h1>
+<div>
+  <% @messages.each do |message| %>
+    <p>
+      <strong>Message:</strong> <%= message.content %><br>
+      <strong>Trigger:</strong> <%= message.trigger %>
+    </p>
+  <% end %>
+</div>

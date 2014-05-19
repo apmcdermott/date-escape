@@ -1,0 +1,9 @@
+<h1>All Scenarios</h1>
+<div>
+  <% @scenarios.each do |scenario| %>
+    <p>
+      <strong>Scenario:</strong> <%= scenario.title %><br>
+      <strong>Enabled?:</strong> <%= scenario.is_enabled? %>
+    </p>
+  <% end %>
+</div>
