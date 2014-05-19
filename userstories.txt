@@ -4,9 +4,9 @@ User can create scenarios
 User can enable/disable scenarios
 User can create triggers that prompt DateEsc to call them
   scenario-dependent
-  "panic word"?
-User texts app number with a trigger (shortcode?)
-  and app calls user number and Says predefined message
+  panic word?
+User texts app number (shortcode?) with a trigger
+  => app calls user number and Says user-defined message
 
 User has:
   name
