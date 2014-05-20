@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
-    @scenarios = Scenario.all
+    @scenarios = current_user.scenarios
     @scenario_titles = @scenarios.map { |scenario|
       scenario[:title]
     }

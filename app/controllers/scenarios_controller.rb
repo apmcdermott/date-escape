@@ -17,7 +17,7 @@ class ScenariosController < ApplicationController
 
   def new
     @scenario = Scenario.new
-    @messages = Message.all
+    @messages = current_user.messages
     @message_triggers = @messages.map { |message|
       message[:trigger]
     }
