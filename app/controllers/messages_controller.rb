@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    @messages = Message.all
+    @messages = Message.all.order(updated_at: :desc)
   end
 
   def show
@@ -16,6 +16,8 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create(message_params)
+    scenario =  Scenario.find_by(title: params[:scenario][:title])
+    @message.scenarios << scenario
     if @message.save
       flash[:notice] = 'Message successfully created'
       redirect_to messages_path
@@ -25,13 +27,20 @@ class MessagesController < ApplicationController
     end
   end
 
+  def edit
+    @message = Message.find(params[:id])
+  end
+
   def update
     message = Message.find(params[:id])
     message.update(message_params)
     redirect_to messages_path
-    @scenario_titles = Scenario.all.map do |scenario|
-      scenario[:title]
-    end
+  end
+
+  def destroy
+    @message = Message.find(params[:id])
+    @message.destroy
+    redirect_to messages_path, notice: "You have deleted the message"
   end
 
   private

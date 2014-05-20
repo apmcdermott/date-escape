@@ -1,6 +1,6 @@
 class ScenariosController < ApplicationController
   def index
-    @scenarios = Scenario.all
+    @scenarios = Scenario.all.order(updated_at: :desc)
   end
 
   def show
@@ -10,16 +10,15 @@ class ScenariosController < ApplicationController
   def new
     @scenario = Scenario.new
     @messages = Message.all
-    @message_triggers = @messages.map do |message|
+    @message_triggers = Message.all.map { |message|
       message[:trigger]
-    end
-    @message_content = @messages.map do |message|
-      message[:content]
-    end
+    }
   end
 
   def create
     @scenario = Scenario.create(scenario_params)
+    message =  Message.where(trigger: params[:message][:trigger]).first
+    @scenario.messages << message
     if @scenario.save
       flash[:notice] = 'Scenario successfully created'
       redirect_to root_path
@@ -29,8 +28,20 @@ class ScenariosController < ApplicationController
     end
   end
 
+  def edit
+    @scenario = Scenario.find(params[:id])
+  end
+
   def update
-    @scenarios = Scenario.all
+    scenario = Scenario.find(params[:id])
+    scenario.update(scenario_params)
+    redirect_to scenarios_path
+  end
+
+  def destroy
+    @scenario = Scenario.find(params[:id])
+    @scenario.destroy
+    redirect_to scenarios_path, notice: "You have deleted the scenario"
   end
 
   private
