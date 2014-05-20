@@ -1,11 +1,9 @@
 <h2>All Messages</h2>
 
-<div>
-  <%= link_to 'New Message', new_message_path %>
-</div>
+<p><%= link_to 'New Message', new_message_path %></p>
 <div>
   <% @messages.each do |message| %>
-    <div class="panel panel-primary">
+    <div class="panel panel-info">
       <div class="panel-heading">
         <h3 class="panel-title">Trigger: <strong><%= message.trigger %></strong></h3>
       </div>
@@ -19,7 +17,8 @@
 
         <br>
 
-        Edit | Add to:
+        <%= link_to 'Edit', edit_message_path(message) %> |
+        <%= link_to 'Delete', message, method: :delete, data: {confirm: 'Really delete this message?'} %>
 
       </div>
     </div>

@@ -1,4 +1,4 @@
-<h1>All Scenarios</h1>
+<h2>All Scenarios</h2>
 <p><%= link_to 'New Scenario', new_scenario_path %></p>
 
 <div>
@@ -14,13 +14,20 @@
       </div>
 
       <div class="panel-body">
-        <strong>Enabled?:</strong> <%= scenario.is_enabled? %><br>
-        <strong>Messages:</strong><br>
+        <strong>Messages:</strong>
 
         <% scenario.messages.each do |message| %>
-          <%= message.trigger %>: "<%= message.content %>"<br>
-        <% end %>
+        <button type="button" class="btn btn-default">
+          <%= link_to message.trigger, message_path(message) %>
+        </button>
+        <% end %> <br>
 
+        <strong>Enabled?:</strong> <%= scenario.is_enabled? %><br>
+
+        <br>
+
+        <%= link_to 'Edit', edit_scenario_path(scenario) %> |
+        <%= link_to 'Delete', scenario, method: :delete, data: {confirm: 'Really delete this scenario?'} %>
       </div>
     </div>
   <% end %>
