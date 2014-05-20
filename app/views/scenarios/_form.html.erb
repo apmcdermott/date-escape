@@ -1,0 +1,25 @@
+<%= form_for @scenario do |f| %>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :title %>:
+    </div>
+    <div class="col-sm-9">
+      <%= f.text_field :title %>
+    </div>
+  </div>
+
+  <%=  fields_for :message do |message_fields| %>
+    <div class="row">
+      <div class="col-sm-3">
+        <%= message_fields.label :trigger, 'Add a message' %>:
+      </div>
+      <div class="col-sm-9">
+        <%= message_fields.select :trigger, choices = @message_triggers, include_blank: true %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <%= f.submit %>
+
+<% end %>
