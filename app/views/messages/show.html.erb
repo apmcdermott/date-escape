@@ -1,0 +1,19 @@
+<h2>Message</h2>
+
+<p>
+<strong>Trigger:</strong> <%= @message.trigger %>
+</p>
+
+<p>
+<strong>Message:</strong> <%= @message.content %>
+</p>
+
+<p>
+<small>
+<strong>Voice:</strong> <%= @message.voice %> |
+<strong>Language:</strong> <%= @message.language %>
+</small>
+</p>
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

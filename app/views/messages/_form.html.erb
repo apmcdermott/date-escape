@@ -41,7 +41,7 @@
         <%= scenario_fields.label :title, 'Add to' %>:
       </div>
       <div class="col-sm-9">
-        <%= scenario_fields.select :title, choices = @scenario_titles %>
+        <%= scenario_fields.select :title, choices = @scenario_titles, include_blank: true %>
       </div>
     </div>
   <% end %>

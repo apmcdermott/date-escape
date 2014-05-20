@@ -10,7 +10,7 @@ class ScenariosController < ApplicationController
   def new
     @scenario = Scenario.new
     @messages = Message.all
-    @message_triggers = Message.all.map { |message|
+    @message_triggers = @messages.map { |message|
       message[:trigger]
     }
   end
