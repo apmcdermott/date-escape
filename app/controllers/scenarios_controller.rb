@@ -39,6 +39,9 @@ class ScenariosController < ApplicationController
 
   def edit
     @scenario = Scenario.find(params[:id])
+    @messages = current_user.messages
+    @message_triggers = @messages.map { |message|
+      message[:trigger]
   end
 
   def update

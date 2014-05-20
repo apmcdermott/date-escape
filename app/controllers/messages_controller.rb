@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
 
   def edit
     @message = Message.find(params[:id])
-    @scenarios = Scenario.all
+    @scenarios = current_user.scenarios
     @scenario_titles = @scenarios.map { |scenario|
       scenario[:title]
     }
