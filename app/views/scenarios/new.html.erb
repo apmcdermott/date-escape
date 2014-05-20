@@ -11,12 +11,4 @@
   </div>
 <% end %>
 
-<%= form_for @scenario do |f| %>
-  <%= f.label :title %>:
-  <%= f.text_field :title %><br />
-
-  <%= f.label :messages, 'Add Messages' %>:
-  <%= f.select :messages, @message_triggers, include_blank: true %><br />
-
-  <%= f.submit %>
-<% end %>
+<%= render 'form' %>
