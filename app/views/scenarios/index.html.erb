@@ -3,9 +3,25 @@
 
 <div>
   <% @scenarios.each do |scenario| %>
-    <p>
-      <strong>Scenario:</strong> <%= scenario.title %><br>
-      <strong>Enabled?:</strong> <%= scenario.is_enabled? %>
-    </p>
+    <% if scenario.is_enabled? == true %>
+      <div class="panel panel-success">
+    <% else %>
+      <div class="panel panel-default">
+    <% end %>
+
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= scenario.title %><br></h3>
+      </div>
+
+      <div class="panel-body">
+        <strong>Enabled?:</strong> <%= scenario.is_enabled? %><br>
+        <strong>Messages:</strong><br>
+
+        <% scenario.messages.each do |message| %>
+          <%= message.trigger %>: "<%= message.content %>"<br>
+        <% end %>
+
+      </div>
+    </div>
   <% end %>
 </div>

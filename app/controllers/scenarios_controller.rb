@@ -13,6 +13,9 @@ class ScenariosController < ApplicationController
     @message_triggers = @messages.map do |message|
       message[:trigger]
     end
+    @message_content = @messages.map do |message|
+      message[:content]
+    end
   end
 
   def create
@@ -27,11 +30,12 @@ class ScenariosController < ApplicationController
   end
 
   def update
+    @scenarios = Scenario.all
   end
 
   private
 
-  def message
+  def scenario_params
     params.require(:scenario).permit(:title, :is_enabled?)
   end
 end

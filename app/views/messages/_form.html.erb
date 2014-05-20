@@ -1,0 +1,52 @@
+<%= form_for @message do |f| %>
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :trigger %>:
+    </div>
+    <div class="col-sm-9">
+      <%= f.text_field :trigger %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :content, "Message" %>:
+    </div>
+    <div class="col-sm-9">
+      <%= f.text_field :content %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :voice %>:
+    </div>
+    <div class="col-sm-9">
+      <%= f.select :voice, choices = %w(man woman) %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <%= f.label :language %>:
+    </div>
+    <div class="col-sm-9">
+      <%= f.select :language, choices = %w(en en-gb es fr de it) %>
+    </div>
+  </div>
+
+  <%=  fields_for :scenario do |scenario_fields| %>
+    <div class="row">
+      <div class="col-sm-3">
+        <%= scenario_fields.label :title, 'Add to' %>:
+      </div>
+      <div class="col-sm-9">
+        <%= scenario_fields.select :title, choices = @scenario_titles %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <%= f.submit %>
+
+<% end %>

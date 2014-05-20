@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519212605) do
+ActiveRecord::Schema.define(version: 20140520153531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "messages", force: true do |t|
+    t.integer  "user_id"
     t.string   "trigger"
     t.text     "content"
+    t.string   "voice",      default: "alice"
+    t.string   "language",   default: "en-US"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,14 +31,17 @@ ActiveRecord::Schema.define(version: 20140519212605) do
     t.integer  "message_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "scenario_messages", ["message_id"], name: "index_scenario_messages_on_message_id", using: :btree
   add_index "scenario_messages", ["scenario_id"], name: "index_scenario_messages_on_scenario_id", using: :btree
+  add_index "scenario_messages", ["user_id"], name: "index_scenario_messages_on_user_id", using: :btree
 
   create_table "scenarios", force: true do |t|
+    t.integer  "user_id"
     t.string   "title"
-    t.boolean  "is_enabled?"
+    t.boolean  "is_enabled?", default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
