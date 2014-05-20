@@ -8,17 +8,15 @@
 
 Scenario.delete_all
 puts 'Creating Scenarios'
-Scenario.create!(title: 'My Scenario', is_enabled?: true)
 Scenario.create!(title: 'Bad date', is_enabled?: true)
 Scenario.create!(title: 'Escape from family', is_enabled?: false)
-Scenario.create!(title: 'Long-ass meeting', is_enabled?: true)
+Scenario.create!(title: 'Awkward person that I hate', is_enabled?: true)
 
 Message.delete_all
 puts 'Creating Messages'
-Message.create!(trigger: 'emergency room', content: 'Hey, I need you to give me a ride to the E R.', voice: 'woman', language: 'en')
-Message.create!(trigger: 'mom is sad', content: 'Honey, are you busy? I need to talk right now.', voice: 'woman', language: 'en')
-Message.create!(trigger: 'dad is sad', content: 'Hey kiddo, are you busy? I need to talk to you right now.', voice: 'man', language: 'en')
-Message.create!(trigger: 'portugese lady', content: 'Bom dia. Algum sem laticínios?', voice: 'alice', language: 'pt-BR')
+Message.create!(trigger: 'figmergency', content: 'The cat is vomiting all over the living room. Please advise.', voice: 'woman', language: 'en')
+Message.create!(trigger: 'mom is mad', content: 'Honey, are you busy? We need to talk.', voice: 'woman', language: 'en')
+Message.create!(trigger: 'dad is sad', content: 'Hey kiddo, I need to talk to you right now.', voice: 'man', language: 'en')
 
 User.delete_all
 puts 'Creating Users'
