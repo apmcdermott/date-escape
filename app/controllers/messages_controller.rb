@@ -1,6 +1,10 @@
 class MessagesController < ApplicationController
+  # Prohibit non-logged in users from viewin or doin stuff
+  before_action :authenticate_user!, except: [:index]
+  before_action :set_messages, only: [:show, :edit, :update, :destroy]
+
   def index
-    @messages = Message.all.order(updated_at: :desc)
+    @messages = current_user.messages.order(updated_at: :desc)
   end
 
   def show
@@ -18,6 +22,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.create(message_params)
     scenario =  Scenario.where(title: params[:scenario][:title]).first
+    current_user.messages << @message
     @message.scenarios << scenario
     if @message.save
       flash[:notice] = 'Message successfully created'
@@ -49,6 +54,12 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def set_messages
+    if user_signed_in?
+      @messages = current_user.messages.find(params[:id])
+    end
+  end
 
   def message_params
     params.require(:message).permit(:trigger, :content, :voice, :language)

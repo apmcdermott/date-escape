@@ -1,6 +1,14 @@
 class ScenariosController < ApplicationController
+  # Prohibit non-logged in users from viewin or doin stuff
+  before_action :authenticate_user!, except: [:index]
+  before_action :set_scenarios, only: [:show, :edit, :update, :destroy]
+
   def index
-    @scenarios = Scenario.all.order(updated_at: :desc)
+    if user_signed_in?
+      @scenarios = current_user.scenarios.order(updated_at: :desc)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def show
@@ -19,6 +27,7 @@ class ScenariosController < ApplicationController
     @scenario = Scenario.create(scenario_params)
     message =  Message.where(trigger: params[:message][:trigger]).first
     @scenario.messages << message
+    current_user.scenarios << @scenario
     if @scenario.save
       flash[:notice] = 'Scenario successfully created'
       redirect_to root_path
@@ -45,6 +54,12 @@ class ScenariosController < ApplicationController
   end
 
   private
+
+  def set_scenarios
+    if user_signed_in?
+      @scenarios = current_user.scenarios.find(params[:id])
+    end
+  end
 
   def scenario_params
     params.require(:scenario).permit(:title, :is_enabled?)
