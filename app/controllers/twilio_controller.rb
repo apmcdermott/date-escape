@@ -23,9 +23,9 @@ class TwilioController < ApplicationController
   end
 
   def process_sms
+    @from = params[:From]
+    @body = params[:Body]
     if user_signed_in?
-      @from = params[:From]
-      @body = params[:Body]
       @call_message = current_user.messages.where(trigger: @body)
       @call = @client.account.calls.create({
           :to => current_user.phone, # To escapee's number
