@@ -36,7 +36,7 @@ class TwilioController < ApplicationController
         :record => 'false'
       })
 
-    render_twiml call
+    render 'process_sms.xml.erb', :content_type => 'text/xml'
   end
 
   def call_handler
