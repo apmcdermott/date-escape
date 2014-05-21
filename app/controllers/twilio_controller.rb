@@ -24,6 +24,7 @@ class TwilioController < ApplicationController
 
   def process_sms
     @escapee = User.where(phone: params["From"]).first # SMS is from the escapee
+    @call_message = @escapee.messages.where(trigger: params["Body"]).first
     call = @client.account.calls.create({
         :to => @escapee.phone, # To escapee's number
         :from => @app_number, # From the app's Twilio number
@@ -38,8 +39,8 @@ class TwilioController < ApplicationController
   end
 
   def call_handler
-    @escapee = User.where(phone: params["To"]).first # Call is being made to the escapee
-    @call_message = @escapee.messages.where(trigger: params["Body"]).first
+    # @escapee = User.where(phone: params["To"]).first # Call is being made to the escapee
+    puts @escapee
     response = Twilio::TwiML::Response.new do |r|
       r.Say "#{@call_message[:content]}", :voice => "#{@call_message[:voice]}"
     end
