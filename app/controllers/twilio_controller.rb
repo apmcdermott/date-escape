@@ -29,7 +29,7 @@ class TwilioController < ApplicationController
         :to => @from.phone, # To escapee's number
         :from => @app_number, # From app's Twilio number
         # Fetch instructions from this URL when the call connects
-        :url => call_handler_url,
+        :url => twilio_call_handler_url,
         :method => 'GET',
         :fallback_method => 'GET',
         :status_callback_method => 'GET',
