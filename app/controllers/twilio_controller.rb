@@ -33,6 +33,7 @@ class TwilioController < ApplicationController
         :fallback_method => 'GET',
         :status_callback_method => 'GET',
         :record => 'false'
+        :message => @call_message
       })
 
     render 'process_sms.xml.erb', :content_type => 'text/xml'
