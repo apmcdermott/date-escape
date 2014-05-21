@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :messages
 
   # Twilio API routes
+  get 'history' => 'twilio#history'
   get 'call' => 'twilio#call'
   get 'sms' => 'twilio#sms'
   get 'call_handler' => 'twilio#call_handler'

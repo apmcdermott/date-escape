@@ -11,50 +11,48 @@ class TwilioController < ApplicationController
   before_action :set_twilio_number
 
   # Set content type to xml for TwiML responses
-  after_filter :set_header
+  after_filter :set_header, only: [:call, :call_handler, :sms]
 
-  def index
+  def history
     # View list of all SMS messages from user
     if user_signed_in?
-      @message_data =
-        @client.account.messages.list({ }).each do |message|
-          {date_sent: message.date_sent, from: message.from, body: message.body}
-        end
+      @message_data = @client.account.messages.list({ from: current_user.phone })
     else
-      redirect_to root_path
+      redirect_to new_user_session_path
     end
   end
 
   def call
-    # to_number = params["To"]
-
-    @client.account.calls.create({
-      :to => '+16176508085', # To escapee's number
-      :from => @app_number, # From app's Twilio number
-      # Fetch instructions from this URL when the call connects
-      :url => call_handler_path,
-      :method => 'GET',
-      :fallback_method => 'GET',
-      :status_callback_method => 'GET',
-      :record => 'false'
-    })
+    if user_signed_in?
+      @client.account.calls.create({
+        :to => current_user.phone, # To escapee's number
+        :from => @app_number, # From app's Twilio number
+        # Fetch instructions from this URL when the call connects
+        :url => call_handler_url,
+        :method => 'GET',
+        :fallback_method => 'GET',
+        :status_callback_method => 'GET',
+        :record => 'false'
+      })
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def call_handler
+    say_message = current_user.messages.where(trigger: params[:body])
     response = Twilio::TwiML::Response.new do |r|
-      r.Say 'Hey there. Congrats on integrating Twilio into your Rails 4 app.', :voice => 'woman'
+      r.Say "Testing testing blah blah", :voice => 'woman'
     end
 
     render_twiml response
   end
 
   def sms
-    message = @client.account.messages.create(:body => "Hi <3",
+    message = @client.account.messages.create(:body => "Test sent from Twilio controller",
       :from => @app_number,
-      :to => "+12154297996",
-      :media_url => "http://www.example.com/hearts.png"
-      )
-
+      :to => "+16176508085",
+    )
     render_twiml message
   end
 
