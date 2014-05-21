@@ -32,7 +32,7 @@ class TwilioController < ApplicationController
         :method => 'GET',
         :fallback_method => 'GET',
         :status_callback_method => 'GET',
-        :record => 'false'
+        :record => 'false',
         :message => @call_message
       })
 
@@ -43,7 +43,8 @@ class TwilioController < ApplicationController
     @escapee = User.where(phone: params["To"]).first # Call is being made to the escapee
     @call_message = @escapee.messages.where(trigger: params["Body"]).first
     response = Twilio::TwiML::Response.new do |r|
-      r.Say "#{@call_message[:content]}", :voice => "#{@call_message[:voice]}"
+      r.Say "Hello."
+      #"#{@call_message[:content]}", :voice => "#{@call_message[:voice]}"
     end
 
     render_twiml response
