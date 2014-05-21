@@ -25,7 +25,7 @@ class TwilioController < ApplicationController
   def process_sms
     @from = User.where(phone: params["From"]).first
     # @call_message = @from.messages.where(trigger: params["Body"]).first
-    @call = @client.account.calls.create({
+    call = @client.account.calls.create({
         :to => @from.phone, # To escapee's number
         :from => @app_number, # From app's Twilio number
         # Fetch instructions from this URL when the call connects
@@ -35,6 +35,8 @@ class TwilioController < ApplicationController
         :status_callback_method => 'GET',
         :record => 'false'
       })
+
+    render_twiml call
   end
 
   def call_handler
