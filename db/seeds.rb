@@ -1,10 +1,5 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Scenario.delete_all
 puts 'Creating Scenarios'
@@ -22,9 +17,9 @@ m4 = Message.create!(trigger: 'meow', content: 'Meow meow, meow meow meow.', voi
 
 User.delete_all
 puts 'Creating Users'
-joe = User.create!(email: 'joe@example.com', password: 'password')
-mandy = User.create!(email: 'mandy@example.com', password: 'password')
-fig = User.create!(email: 'fig@example.com', password: 'password')
+joe = User.create!(email: 'joe@example.com', password: 'password', phone: '+12154297996')
+mandy = User.create!(email: 'mandy@example.com', password: 'password', phone: '+16176508085')
+fig = User.create!(email: 'fig@example.com', password: 'password', phone: '+19196091107')
 
 puts 'Linking Data'
 s1.messages << m1
