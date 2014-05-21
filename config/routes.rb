@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :scenarios
   resources :messages
 
-  # Twilio API route
-  post 'twilio/voice' => 'twilio#voice'
+  # Twilio API routes
+  get 'call' => 'twilio#call'
+  get 'sms' => 'twilio#sms'
+  get 'call_handler' => 'twilio#call_handler'
+
 end
