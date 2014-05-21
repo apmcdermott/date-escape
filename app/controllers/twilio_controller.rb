@@ -23,23 +23,18 @@ class TwilioController < ApplicationController
   end
 
   def process_sms
-    @from = params[:From]
-    @body = params[:Body]
-    if user_signed_in?
-      @call_message = current_user.messages.where(trigger: @body)
-      @call = @client.account.calls.create({
-          :to => current_user.phone, # To escapee's number
-          :from => @app_number, # From app's Twilio number
-          # Fetch instructions from this URL when the call connects
-          :url => call_handler_url,
-          :method => 'GET',
-          :fallback_method => 'GET',
-          :status_callback_method => 'GET',
-          :record => 'false'
-        })
-    else
-      redirect_to new_user_session_path
-    end
+    @from = Users.where(phone: params[:From]).first
+    @call_message = from.messages.where(trigger: params[:Body]).first
+    @call = @client.account.calls.create({
+        :to => @from, # To escapee's number
+        :from => @app_number, # From app's Twilio number
+        # Fetch instructions from this URL when the call connects
+        :url => call_handler_url,
+        :method => 'GET',
+        :fallback_method => 'GET',
+        :status_callback_method => 'GET',
+        :record => 'false'
+      })
   end
 
   def call_handler
