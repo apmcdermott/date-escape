@@ -5,31 +5,44 @@ class TwilioController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   # Instantiate new client
-  before_action :set_client, only: [:new, :create]
+  before_action :set_client
+
+  # Instantiate From numer
+  before_action :set_twilio_number
 
   # Set content type to xml for TwiML responses
   after_filter :set_header
 
   def index
-  end
-
-  def create
+    # View list of all SMS messages from user
+    if user_signed_in?
+      @message_data =
+        @client.account.messages.list({ }).each do |message|
+          {date_sent: message.date_sent, from: message.from, body: message.body}
+        end
+    else
+      redirect_to root_path
+    end
   end
 
   def call
     # to_number = params["To"]
 
-    @call = @client.account.calls.create(
-      :from => @app_number,   # From app's Twilio number
-      :to => '+16176508085',     # To escapee's number
+    @client.account.calls.create({
+      :to => '+16176508085', # To escapee's number
+      :from => @app_number, # From app's Twilio number
       # Fetch instructions from this URL when the call connects
-      :url => call_handler_path
-      )
+      :url => call_handler_path,
+      :method => 'GET',
+      :fallback_method => 'GET',
+      :status_callback_method => 'GET',
+      :record => 'false'
+    })
   end
 
   def call_handler
     response = Twilio::TwiML::Response.new do |r|
-      r.Say 'Hey there. Congrats on integrating Twilio into your Rails 4 app.', :voice => 'alice'
+      r.Say 'Hey there. Congrats on integrating Twilio into your Rails 4 app.', :voice => 'woman'
     end
 
     render_twiml response
@@ -48,10 +61,10 @@ class TwilioController < ApplicationController
   private
 
   def set_client
-    @client = Twilio::REST::Client.new(ENV['TWILIO_SID', 'TWILIO_AUTH_TOKEN'])
+    @client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_AUTH_TOKEN'])
   end
 
   def set_twilio_number
-    @app_number = '+16176069516'
+    @app_number = "+16176069516"
   end
 end
