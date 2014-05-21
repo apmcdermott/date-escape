@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Twilio API routes
   get 'history' => 'twilio#history'
   get 'call' => 'twilio#call'
-  get 'sms' => 'twilio#sms'
+  get 'process_sms' => 'twilio#process_sms'
   get 'call_handler' => 'twilio#call_handler'
 
 end
