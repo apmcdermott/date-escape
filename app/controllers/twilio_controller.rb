@@ -23,8 +23,8 @@ class TwilioController < ApplicationController
   end
 
   def process_sms
-    @from = User.where(phone: params[:From]).first
-    @call_message = from.messages.where(trigger: params[:Body]).first
+    @from = User.where(phone: params["From"]).first
+    @call_message = @from.messages.where(trigger: params["Body"]).first
     @call = @client.account.calls.create({
         :to => @from, # To escapee's number
         :from => @app_number, # From app's Twilio number
