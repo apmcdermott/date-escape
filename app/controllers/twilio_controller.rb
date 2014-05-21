@@ -23,13 +23,11 @@ class TwilioController < ApplicationController
   end
 
   def process_sms
-    @from = User.where(phone: params["From"]).first
-    # @call_message = @from.messages.where(trigger: params["Body"]).first
+    @escapee = User.where(phone: params["From"]).first # SMS is from the escapee
     call = @client.account.calls.create({
-        :to => @from.phone, # To escapee's number
-        :from => @app_number, # From app's Twilio number
-        # Fetch instructions from this URL when the call connects
-        :url => twilio_call_handler_url,
+        :to => @escapee.phone, # To escapee's number
+        :from => @app_number, # From the app's Twilio number
+        :url => twilio_call_handler_url, # Fetch instructions here when call connects
         :method => 'GET',
         :fallback_method => 'GET',
         :status_callback_method => 'GET',
@@ -40,8 +38,8 @@ class TwilioController < ApplicationController
   end
 
   def call_handler
-    @from = User.where(phone: params["From"]).first
-    @call_message = @from.messages.where(trigger: params["Body"]).first
+    @escapee = User.where(phone: params["To"]).first # Call is being made to the escapee
+    @call_message = @escapee.messages.where(trigger: params["Body"]).first
     response = Twilio::TwiML::Response.new do |r|
       r.Say "#{@call_message[:content]}", :voice => "#{@call_message[:voice]}"
     end
