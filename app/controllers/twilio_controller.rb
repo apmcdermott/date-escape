@@ -22,38 +22,32 @@ class TwilioController < ApplicationController
     end
   end
 
-  def call
+  def process_sms
     if user_signed_in?
-      @client.account.calls.create({
-        :to => current_user.phone, # To escapee's number
-        :from => @app_number, # From app's Twilio number
-        # Fetch instructions from this URL when the call connects
-        :url => call_handler_url,
-        :method => 'GET',
-        :fallback_method => 'GET',
-        :status_callback_method => 'GET',
-        :record => 'false'
-      })
+      @from = params[:From]
+      @body = params[:Body]
+      @call_message = current_user.messages.where(trigger: @body)
+      @call = @client.account.calls.create({
+          :to => current_user.phone, # To escapee's number
+          :from => @app_number, # From app's Twilio number
+          # Fetch instructions from this URL when the call connects
+          :url => call_handler_url,
+          :method => 'GET',
+          :fallback_method => 'GET',
+          :status_callback_method => 'GET',
+          :record => 'false'
+        })
     else
       redirect_to new_user_session_path
     end
   end
 
   def call_handler
-    say_message = current_user.messages.where(trigger: params[:body])
     response = Twilio::TwiML::Response.new do |r|
-      r.Say "Testing testing blah blah", :voice => 'woman'
+      r.Say "#{@call_message.body}", :voice => "#{@call_message.voice}"
     end
 
     render_twiml response
-  end
-
-  def sms
-    message = @client.account.messages.create(:body => "Test sent from Twilio controller",
-      :from => @app_number,
-      :to => "+16176508085",
-    )
-    render_twiml message
   end
 
   private
