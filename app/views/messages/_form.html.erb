@@ -1,7 +1,7 @@
 <%= form_for @message do |f| %>
   <div class="row">
     <div class="col-sm-3">
-      <%= f.label :trigger %>:
+      <%= f.label :trigger, "Trigger:" %>
     </div>
     <div class="col-sm-9">
       <%= f.text_field :trigger %>
@@ -10,7 +10,7 @@
 
   <div class="row">
     <div class="col-sm-3">
-      <%= f.label :content, "Message" %>:
+      <%= f.label :content, "Message:" %>
     </div>
     <div class="col-sm-9">
       <%= f.text_field :content %>
@@ -19,33 +19,21 @@
 
   <div class="row">
     <div class="col-sm-3">
-      <%= f.label :voice %>:
+      <%= f.label :voice, "Voice:" %>
     </div>
     <div class="col-sm-9">
-      <%= f.select :voice, choices = %w(man woman) %>
+      <%= f.select :voice, choices = Message::VOICES %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-3">
-      <%= f.label :language %>:
+      <%= f.label :language, "Language:" %>
     </div>
     <div class="col-sm-9">
-      <%= f.select :language, choices = %w(en en-gb es fr de it) %>
+      <%= f.select :language, choices = Message::LANGUAGES %>
     </div>
   </div>
-
-  <%=  fields_for :scenario do |scenario_fields| %>
-    <div class="row">
-      <div class="col-sm-3">
-        <%= scenario_fields.label :title, 'Add to' %>:
-      </div>
-      <div class="col-sm-9">
-        <%= scenario_fields.select :title, choices = @scenario_titles, include_blank: true %>
-      </div>
-    </div>
-  <% end %>
-
 
   <%= f.submit %>
 

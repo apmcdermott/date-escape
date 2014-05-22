@@ -4,7 +4,11 @@ class MessagesController < ApplicationController
   before_action :set_messages, only: [:show, :edit, :update, :destroy]
 
   def index
-    @messages = current_user.messages.order(updated_at: :desc)
+    if user_signed_in?
+      @messages = current_user.messages.order(updated_at: :desc)
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def show
