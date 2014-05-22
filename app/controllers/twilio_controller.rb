@@ -24,7 +24,7 @@ class TwilioController < ApplicationController
 
   def process_sms
     @escapee = User.where(phone: params["From"]).first # SMS is from the escapee
-    @call_message = @escapee.messages.where(trigger: params["Body"]).first
+    $call_message = @escapee.messages.where(trigger: params["Body"]).first
     @call = @client.account.calls.create({
         :to => @escapee.phone, # To escapee's number
         :from => @app_number, # From the app's Twilio number
@@ -40,15 +40,13 @@ class TwilioController < ApplicationController
 
   def call_handler
     @escapee = User.where(phone: params["To"]).first # Call is being made to the escapee
-    puts @call_message
+    puts $call_message
 
-    # This is now pulled out into call_handler.xml.erb for clarity
-    # response = Twilio::TwiML::Response.new do |r|
-    #   r.Say "#{@call_message[:content]}"
-    # end
-    # render_twiml response
+    response = Twilio::TwiML::Response.new do |r|
+      r.Say "I'm Twilio and I hate you"
+    end
 
-    render 'call_handler.xml.erb', :content_type => 'text/xml'
+    render_twiml response
   end
 
   private
