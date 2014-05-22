@@ -43,7 +43,7 @@ class TwilioController < ApplicationController
     puts $call_message
 
     response = Twilio::TwiML::Response.new do |r|
-      r.Say "I'm Twilio and I hate you"
+      r.Say "#{$call_message[:content]}"
     end
 
     render_twiml response
