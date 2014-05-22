@@ -25,7 +25,7 @@ class TwilioController < ApplicationController
   def process_sms
     @escapee = User.where(phone: params["From"]).first # SMS is from the escapee
     @@call_message = @escapee.messages.where(trigger: params["Body"]).first
-    call = @client.account.calls.create({
+    @call = @client.account.calls.create({
         :to => @escapee.phone, # To escapee's number
         :from => @app_number, # From the app's Twilio number
         :url => twilio_call_handler_url, # Fetch instructions here when call connects
