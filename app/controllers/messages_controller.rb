@@ -13,19 +13,10 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
-    @scenarios = current_user.scenarios
-    @scenario_titles = @scenarios.map { |scenario|
-      scenario[:title]
-    }
   end
 
   def create
     @message = Message.create(message_params)
-    if params[:scenario][:title].empty?
-      scenario = ""
-      scenario = Scenario.where(title: params[:scenario][:title]).first
-      @message.scenarios << scenario
-    end
     current_user.messages << @message
     if @message.save
       flash[:notice] = 'Message successfully created'
@@ -38,10 +29,6 @@ class MessagesController < ApplicationController
 
   def edit
     @message = Message.find(params[:id])
-    @scenarios = current_user.scenarios
-    @scenario_titles = @scenarios.map { |scenario|
-      scenario[:title]
-    }
   end
 
   def update

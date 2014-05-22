@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'scenarios#index'
-  resources :scenarios
+  root 'messages#index'
   resources :messages
 
   # Twilio API routes
