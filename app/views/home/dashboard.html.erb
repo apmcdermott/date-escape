@@ -1,9 +1,28 @@
 <h2>Dashboard</h2>
+<hr />
 
-<h3>My Profile</h3>
-<%= current_user.email %><br>
-<%= current_user.phone %><br>
-<%= link_to "Edit", edit_user_registration_path %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 dashboard">
+      <div class="module">
+        <h3 class="profile-inline">My Profile</h3>
+        <%= link_to ("<span class='glyphicon glyphicon-pencil edit'></span>").html_safe, edit_user_registration_path %>
+        <div class="module-content">
+          <strong>Email:</strong> <%= current_user.email %><br>
+          <strong>Phone:</strong> <%= current_user.phone %><br>
+          <small><%= link_to "Edit", edit_user_registration_path %></small>
+        </div>
+      </div>
+    </div> <!-- /col-sm-6 -->
 
-<h3>Quick Message</h3>
-<%= render 'messages/form', message: @message %>
+    <div class="col-sm-6 dashboard">
+      <div class="module">
+        <h3 class="profile-inline">Quick Message</h3>
+        <div class="module-content">
+          <%= render 'messages/form', message: @message %>
+        </div>
+      </div>
+    </div> <!-- /col-sm-6 -->
+
+  </div> <!-- /row -->
+</div> <!-- /container-fluid -->
