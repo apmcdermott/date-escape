@@ -26,9 +26,6 @@ gem 'devise'
 # Bootstrap
 gem 'bootstrap-sass'
 
-# Simpleform Form Builder
-gem 'simple_form'
-
 group :production do
   gem 'rails_12factor'
 end
