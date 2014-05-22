@@ -1,7 +1,7 @@
 <%= form_for @message, url: messages_path, html: { method: :post, role: 'form' } do |f| %>
   <div class="form-group">
     <%= f.label :trigger, "Trigger:" %><br>
-    <%= f.text_field :trigger, placeholder: "Enter trigger words" %>
+    <%= f.text_field :trigger, placeholder: "Enter trigger word(s)" %>
   </div>
 
   <div class="form-group">

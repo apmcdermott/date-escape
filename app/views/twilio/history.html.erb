@@ -1,7 +1,7 @@
 <section>
   <dl>
     <% @message_data.each do |message| %>
-      <dt>Message: <%= message.body %></dt>
+      <dt>Trigger: <%= message.body %></dt>
       <dd>Sent on <%= message.date_sent %></dd>
       <hr>
     <% end %>
