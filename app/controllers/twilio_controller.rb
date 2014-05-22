@@ -41,9 +41,12 @@ class TwilioController < ApplicationController
   def call_handler
     @escapee = User.where(phone: params["To"]).first # Call is being made to the escapee
     puts @call_message
+
+    # This is now pulled out into call_handler.xml.erb for clarity
     # response = Twilio::TwiML::Response.new do |r|
     #   r.Say "#{@call_message[:content]}"
     # end
+    # render_twiml response
 
     render 'call_handler.xml.erb', :content_type => 'text/xml'
   end
