@@ -1,0 +1,9 @@
+<h2>Dashboard</h2>
+
+<h3>My Profile</h3>
+<%= current_user.email %><br>
+<%= current_user.phone %><br>
+<%= link_to "Edit", edit_user_registration_path %>
+
+<h3>Quick Message</h3>
+<%= render 'messages/form', message: @message %>
