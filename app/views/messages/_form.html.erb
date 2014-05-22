@@ -1,40 +1,27 @@
-<%= form_for @message do |f| %>
-  <div class="row">
-    <div class="col-sm-3">
-      <%= f.label :trigger, "Trigger:" %>
-    </div>
-    <div class="col-sm-9">
-      <%= f.text_field :trigger %>
-    </div>
+<%= form_for @message, url: messages_path, html: { method: :post, role: 'form' } do |f| %>
+  <div class="form-group">
+    <%= f.label :trigger, "Trigger:" %><br>
+    <%= f.text_field :trigger, placeholder: "Enter trigger words" %>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
-      <%= f.label :content, "Message:" %>
-    </div>
-    <div class="col-sm-9">
-      <%= f.text_field :content %>
-    </div>
+  <div class="form-group">
+    <%= f.label :content, "Message:" %><br>
+    <%= f.text_field :content, html: { rows: "3" }, placeholder: "Enter call message" %>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
-      <%= f.label :voice, "Voice:" %>
-    </div>
-    <div class="col-sm-9">
-      <%= f.select :voice, choices = Message::VOICES %>
-    </div>
+  <div class="form-group">
+    <%= f.label :voice, "Voice:", class: 'strong' %>
+
+    <!-- Radio butans for voice options -->
+    <span class="options">
+      <% Message::VOICES.each do |type| %>
+        <label class="radio-inline">
+          <%= f.radio_button :voice, type %> <%= type %>
+        </label>
+      <% end %>
+      </span>
   </div>
 
-  <div class="row">
-    <div class="col-sm-3">
-      <%= f.label :language, "Language:" %>
-    </div>
-    <div class="col-sm-9">
-      <%= f.select :language, choices = Message::LANGUAGES %>
-    </div>
-  </div>
-
-  <%= f.submit %>
+  <%= f.submit class: 'btn btn-primary' %>
 
 <% end %>
