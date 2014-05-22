@@ -21,9 +21,12 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.create(message_params)
-    scenario =  Scenario.where(title: params[:scenario][:title]).first
+    if params[:scenario][:title].empty?
+      scenario = ""
+      scenario = Scenario.where(title: params[:scenario][:title]).first
+      @message.scenarios << scenario
+    end
     current_user.messages << @message
-    @message.scenarios << scenario
     if @message.save
       flash[:notice] = 'Message successfully created'
       redirect_to messages_path
