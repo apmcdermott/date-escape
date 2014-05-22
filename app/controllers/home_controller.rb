@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   end
 
   def dashboard
+    @message = Message.new
   end
 
 end
