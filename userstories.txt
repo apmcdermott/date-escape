@@ -1,17 +1,15 @@
-*User can create account
+User can create account
 User can view/edit profile
-User can create scenarios
-User can enable/disable scenarios
 User can create triggers that prompt DateEsc to call them
-  scenario-dependent
-  panic word?
 User texts app number (shortcode?) with a trigger
   => app calls user number and Says user-defined message
+Triggers are unique to user, but not across users
 
 User has:
   name
   email
-  scenarios/messages/triggers
+  messages
+  triggers
   message history
   phone number
 
@@ -20,7 +18,15 @@ Message has:
   content
   media?
   trigger
-  scenario (optional)
+
+
+Removed:
+(all this stuff is on the scenario branch)
+(in case I change my mind and panic)
+
+User can create scenarios
+User can enable/disable scenarios
+Triggers are scenario-dependent
 
 Scenario has:
   title
