@@ -11,7 +11,7 @@ class TwilioController < ApplicationController
   before_action :set_twilio_number
 
   # Set content type to xml for TwiML responses
-  after_filter :set_header, only: [:call, :call_handler, :sms]
+  after_filter :set_header, only: [:call_handler, :process_sms]
 
   def history
     # View list of all SMS messages from user
