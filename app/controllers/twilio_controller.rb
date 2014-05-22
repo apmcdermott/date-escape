@@ -24,7 +24,7 @@ class TwilioController < ApplicationController
 
   def process_sms
     @escapee = User.where(phone: params["From"]).first # SMS is from the escapee
-    @call_message = @escapee.messages.where(trigger: params["Body"]).first
+    flash[:call_message] = @escapee.messages.where(trigger: params["Body"]).first
     call = @client.account.calls.create({
         :to => @escapee.phone, # To escapee's number
         :from => @app_number, # From the app's Twilio number
@@ -33,7 +33,6 @@ class TwilioController < ApplicationController
         :fallback_method => 'GET',
         :status_callback_method => 'GET',
         :record => 'false',
-        :message => @call_message
       })
 
     render 'process_sms.xml.erb', :content_type => 'text/xml'
@@ -41,10 +40,9 @@ class TwilioController < ApplicationController
 
   def call_handler
     @escapee = User.where(phone: params["To"]).first # Call is being made to the escapee
-    @call_message = @escapee.messages.where(trigger: params["Body"]).first
+    @call_message = flash[:call_message]
     response = Twilio::TwiML::Response.new do |r|
-      r.Say "Hello."
-      #"#{@call_message[:content]}", :voice => "#{@call_message[:voice]}"
+      r.Say "#{@call_message[:content]}", :voice => "#{@call_message[:voice]}"
     end
 
     render_twiml response
