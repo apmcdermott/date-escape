@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522042926) do
+ActiveRecord::Schema.define(version: 20140522195004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20140522042926) do
     t.integer  "user_id"
     t.string   "trigger"
     t.text     "content"
-    t.string   "voice",      default: "alice"
-    t.string   "language",   default: "en-US"
+    t.string   "voice",      default: "man"
+    t.string   "language",   default: "en"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
