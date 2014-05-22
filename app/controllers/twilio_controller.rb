@@ -40,10 +40,9 @@ class TwilioController < ApplicationController
 
   def call_handler
     @escapee = User.where(phone: params["To"]).first # Call is being made to the escapee
-    puts $call_message
 
     response = Twilio::TwiML::Response.new do |r|
-      r.Say "#{$call_message[:content]}"
+      r.Say "#{$call_message[:content]}", :voice => "#{$call_message[:voice]}", :language => "#{$call_message[:language]}"
     end
 
     render_twiml response
