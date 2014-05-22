@@ -1,7 +1,9 @@
 <section>
-  <% @message_data.each do |message| %>
-    Date Sent: <%= message.date_sent %><br>
-    Message: <%= message.body %>
-    <hr>
-  <% end %>
+  <dl>
+    <% @message_data.each do |message| %>
+      <dt>Message: <%= message.body %></dt>
+      <dd>Sent on <%= message.date_sent %></dd>
+      <hr>
+    <% end %>
+  </dl>
 </section>
