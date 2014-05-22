@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140521175847) do
+ActiveRecord::Schema.define(version: 20140522042926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,18 +26,6 @@ ActiveRecord::Schema.define(version: 20140521175847) do
     t.datetime "updated_at"
   end
 
-  create_table "scenario_messages", force: true do |t|
-    t.integer  "scenario_id"
-    t.integer  "message_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-  end
-
-  add_index "scenario_messages", ["message_id"], name: "index_scenario_messages_on_message_id", using: :btree
-  add_index "scenario_messages", ["scenario_id"], name: "index_scenario_messages_on_scenario_id", using: :btree
-  add_index "scenario_messages", ["user_id"], name: "index_scenario_messages_on_user_id", using: :btree
-
   create_table "scenarios", force: true do |t|
     t.integer  "user_id"
     t.string   "title"
@@ -45,6 +33,16 @@ ActiveRecord::Schema.define(version: 20140521175847) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_messages", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "message_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_messages", ["message_id"], name: "index_user_messages_on_message_id", using: :btree
+  add_index "user_messages", ["user_id"], name: "index_user_messages_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
