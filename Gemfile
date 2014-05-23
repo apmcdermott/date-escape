@@ -26,6 +26,9 @@ gem 'devise'
 # Bootstrap
 gem 'bootstrap-sass'
 
+# Font Awesome bc Glyphicons are meh
+gem "font-awesome-rails"
+
 group :production do
   gem 'rails_12factor'
 end
