@@ -34,3 +34,7 @@ Set `@app_number` to *your* Twilio number at the end of `twilio_controller.rb`:
 Then run:
 `rake db:migrate`
 `rake db:seed`
+
+You can either sign up with one of the phone numbers you verified on Twilio, or you can add it manually to `db/seeds.rb`.
+
+ANOTHER NOTE: You must format your phone number like this: +1XXXXXXX
