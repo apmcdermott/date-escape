@@ -1,6 +1,5 @@
 # Date Escape
 ## Gracefully extricate yourself from any situation
-===========
 
 [http://date-escape.herokuapp.com](http://date-escape.herokuapp.com)
 
@@ -24,8 +23,9 @@ TWILIO_SID=yourkey
 TWILIO_AUTH_TOKEN=yourtoken
 ```
 
-Set `@app_number` to *your* Twilio number in `app/controllers/twilio_controller.rb`:
+Set `@app_number` to *your* Twilio number at the end of `twilio_controller.rb`:
 ```ruby
+# app/controllers/twilio_controller.rb
   def set_twilio_number
     @app_number = "+16176069516"
   end
