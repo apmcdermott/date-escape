@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+
+  # Allows for additional fields in Devise
+  devise_for :users, :controllers => { registrations: 'registrations' }
 
   # Authenticated users to go their dashboard
   authenticated do
