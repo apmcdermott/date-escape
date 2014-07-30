@@ -8,7 +8,7 @@
         <h3 class="profile-inline">My Profile</h3>
         <%= link_to ("<span class='glyphicon glyphicon-pencil edit'></span>").html_safe, edit_user_registration_path %>
         <div class="module-content">
-          <strong>Twilio Number:</strong> +1 617-606-9516
+          <strong>Twilio Number:</strong> +1 617-606-9516<br>
           <strong>Email:</strong> <%= current_user.email %><br>
           <strong>Phone:</strong> <%= current_user.phone %><br>
           <strong>Last Login:</strong> <%= current_user.last_sign_in_at.localtime.strftime("%B %d, %Y at %I:%M%p") %><br>
