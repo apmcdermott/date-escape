@@ -10,8 +10,8 @@
     <div><small>Currently waiting confirmation for: <%= resource.unconfirmed_email %></small></div>
   <% end %>
 
-  <div class="form-group"><%= f.label :phone, "Mobile Number" %><br />
-  <%= f.phone_field :phone %></div>
+  <div class="form-group"><%= f.label :phone, "Mobile Number" %> <small><em>(no spaces, dashes or parens)</em></small><br />
+  <%= f.phone_field :phone, placeholder: "+1xxxxxxxxxx" %></div>
 
   <div class="form-group"><%= f.label :password %> <small><em>(leave blank if you don't want to change it)</em></small><br />
     <%= f.password_field :password, autocomplete: "off" %></div>
