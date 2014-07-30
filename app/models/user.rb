@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :messages
   has_one :user_message
-  validates :phone, length: { is: 10 }
+  validates :phone, length: { is: 12 }
 end
